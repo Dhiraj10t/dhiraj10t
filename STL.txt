@@ -1,0 +1,144 @@
+/*Experiment No 6:  
+Write C++ program using STL for sorting and searching user defined records 
+such as personal records (Name, DOB, Telephone number etc) using vector 
+container. */ 
+#include <iostream> //standard input output stream header file 
+#include <algorithm> //The STL algorithms are generic because they can operate on a variety 
+of data //structures 
+#include<string> 
+#include <vector> //The header file f#include<iostor the STL vector library is vector. 
+using namespace std; 
+class person  // creating class Item 
+{ 
+public: 
+char name[10]; 
+int DOB; 
+int pno; 
+int id; 
+bool operator==(const person& p1)  //Boolean operators  to create more 
+complex  Conditional statements 
+{ 
+if(id==p1.id)  //operator will return 1 if the comparison is true, //or 0 if the 
+comparison is false 
+return 1; 
+return 0; 
+} 
+bool operator<(const person& p1) 
+{ 
+if(id<p1.id) //operator will return 1 if the comparison is true, or 0 if the comparison 
+is false 
+return 1; 
+return 0; 
+} 
+}; 
+vector<person> o1; 
+void print(person &p1); 
+void display(); 
+void insert(); 
+void search(); 
+void dlt(); 
+bool compare(const person &p1, const person &p2) 
+{ 
+//if (i1.name != i2.name) return i1.cost < i2.cost; 
+return p1.id< p2.id; 
+} 
+int main()  
+{ 
+int ch; 
+do 
+{ 
+cout<<"\n* * * * * Menu * * * * *"; 
+cout<<"\n1.Insert"; 
+cout<<"\n2.Display"; 
+cout<<"\n3.Search"; 
+cout<<"\n4.Sort"; 
+cout<<"\n5.Delete"; 
+cout<<"\n6.Exit"; 
+cout<<"\nEnter your choice : "; 
+cin>>ch; 
+switch(ch) 
+{ 
+case 1: 
+insert(); 
+break; 
+case 2: 
+display(); 
+ break; 
+ 
+     case 3: 
+search(); 
+ break; 
+     case 4: 
+             sort(o1.begin(),o1.end(), compare); 
+             cout<<"\n\n Sorted on id : "; 
+             display(); 
+             break; 
+       case 5: 
+dlt(); 
+ break; 
+        case 6: 
+exit(0); 
+        } 
+ 
+} while(ch!=7);    // close do-while loop 
+ return 0; 
+} 
+void insert() 
+{ 
+person p1; 
+cout<<"\nEnter person Name : "; 
+cin>>p1.name; 
+cout<<"\nEnter person DOB : "; 
+cin>>p1.DOB; 
+cout<<"\nEnter person mob no : "; 
+cin>>p1.pno; 
+cout<<"\nEnteperson id : "; 
+cin>>p1.id; 
+o1.push_back(p1); 
+} 
+void display() 
+{ 
+for_each(o1.begin(),o1.end(),print); 
+} 
+void print(person &p1) 
+{ 
+cout<<"\n"; 
+cout<<"\npersonName : "<<p1.name; 
+cout<<"\npersonDOB : "<<p1.DOB; 
+cout<<"\nperson mob no : "<<p1.pno; 
+cout<<"\nperson id : "<<p1.id; 
+cout<<"\n\n"; 
+} 
+void search() 
+{ 
+vector<person>::iterator p; 
+person p1; 
+cout<<"\nEnter person id to search : "; 
+cin>>p1.id; 
+p=find(o1.begin(),o1.end(),p1); 
+if(p==o1.end()) 
+{ 
+cout<<"\nNot found!!!"; 
+} 
+else 
+{ 
+cout<<"\nFound!!!"; 
+} 
+} 
+void dlt() 
+{ 
+vector<person>::iterator p; 
+person p1; 
+cout<<"\nEnter person id to delete : "; 
+cin>>p1.id; 
+p=find(o1.begin(),o1.end(),p1); 
+if(p==o1.end()) 
+{ 
+cout<<"\nNot found!!!"; 
+} 
+else 
+{ 
+o1.erase(p); 
+cout<<"\nDeleted!!!"; 
+} 
+} 
